@@ -21,7 +21,7 @@ export const getAllColleges = async (req, res) => {
 export const getCollegesDetails = async (req, res) => {
 
     try {
-        const {collegeid} = req.params
+        const { collegeid } = req.params
         const college = await College.findById(collegeid)
 
         res.json({
@@ -71,8 +71,7 @@ export const deleteCollege = async (req, res) => {
 
     try {
         const { collegeid } = req.params
-        const deletedCollege = await College.findOneAndDelete(collegeid, { new: true })
-        console.log(deletedCollege);
+        const deletedCollege = await College.findByIdAndDelete(collegeid, { new: true })
         await cloudinary.uploader.destroy(deletedCollege.logo.public_id);
         const allColleges = await College.find()
 
